@@ -1,0 +1,27 @@
+{{!< default}}
+
+{{!-- The comment above "< default" means - insert everything in this file into
+    the {{{body}}} of the default.hbs template, containing the blog header/footer. --}}
+
+{{!-- Everything inside the #post tags pulls data from the post --}}
+{{#post}}
+
+<main  role="main">
+  <article class="ph3 ph5-ns">
+    <header>
+      <h1 class="f2 f-subheadline-ns mb4">{{title}}</h1>
+      <section class="post-meta">
+          <time class="post-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="DD MMMM YYYY"}}</time>
+      </section>
+    </header>
+    <section class="f4 f3-ns measure lh-copy">
+      {{content}}
+    </section>
+
+
+    {{> "back"}}
+
+    </article>
+</main>
+
+{{/post}}

@@ -1,0 +1,11 @@
+<footer class="pb3">
+  <nav class="pagination" role="navigation">
+    {{#if prev}}
+        <a class="no-underline dark-gray dim" href="{{page_url prev}}">&larr; Newer Posts</a>
+    {{/if}}
+    <span class="page-number">Page {{page}} of {{pages}}</span>
+    {{#if next}}
+        <a class="no-underline dark-gray dim" href="{{page_url next}}">Older Posts &rarr;</a>
+    {{/if}}
+</nav>
+</div>
