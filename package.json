@@ -2,6 +2,7 @@
   "name": "ghost-tachyons-theme",
   "version": "0.0.1",
   "dependencies": {
+    "prismjs": "^1.5.1",
     "sass-module-importer": "^1.2.1",
     "tachyons-sass": "^4.5.5"
   },
