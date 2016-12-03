@@ -2,14 +2,33 @@
 
 var gulp = require('gulp');
 var sass = require('gulp-sass');
-var moduleImporter = require('sass-module-importer');
+var uglify = require('gulp-uglify');
+var clean = require('gulp-clean')
 
-/* sass things */
+var moduleImporter = require('sass-module-importer');
+var pump = require('pump');
+var runSequence = require('run-sequence');
+
 const baseAssets = './assets/'
 
-gulp.task('default', ['copy', 'sass:watch']);
 
-gulp.task('production', ['copy', 'sass:production']);
+gulp.task('default', function (done) {
+  runSequence('clean',
+                ['copy',
+                'sass:watch'], done)
+})
+
+gulp.task('production', function (done) {
+  runSequence('clean',
+                ['compress',
+                'sass:production'], done)
+})
+
+gulp.task('clean', function (done) {
+  return gulp.src([baseAssets + '/**'], {read: false})
+  .pipe(clean(done))
+})
+
 
 gulp.task('sass', function () {
   return gulp.src('./dev/sass/*.scss')
@@ -28,7 +47,19 @@ gulp.task('sass:watch', function () {
   gulp.watch('./dev/sass/*.scss', ['sass']);
 });
 
+
 gulp.task('copy', function() {
     gulp.src(['./node_modules/prismjs/prism.js'])
         .pipe(gulp.dest(baseAssets + 'js'));
+});
+
+
+gulp.task('compress', function (done) {
+  pump([
+        gulp.src(['./node_modules/prismjs/prism.js']),
+        uglify(),
+        gulp.dest(baseAssets + 'js')
+    ],
+    done
+  );
 });
