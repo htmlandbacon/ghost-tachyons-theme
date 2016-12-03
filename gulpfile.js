@@ -15,7 +15,8 @@ const baseAssets = './assets/'
 gulp.task('default', function (done) {
   runSequence('clean',
                 ['copy',
-                'sass:watch'], done)
+                 'sass',
+                 'sass:watch'], done)
 })
 
 gulp.task('production', function (done) {
